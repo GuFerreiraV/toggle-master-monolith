@@ -231,7 +231,7 @@ Custos que **não** entram: VPC, subnets, route tables, Internet Gateway, Securi
 
 - Preços On-Demand, sem considerar Free Tier/créditos. Em conta elegível ao Free Tier, o custo efetivo pode ser zero.
 - Link da estimativa: https://calculator.aws/#/estimate?id=2bba7de997249160f940e62f9b9cef3da75bdb5e
-- PDF exportado: `Docs/My Estimate - Calculadora de Preços da AWS.pdf`
+- PDF exportado: `Docs/estimativa-custos-aws.pdf`
 
 ---
 
