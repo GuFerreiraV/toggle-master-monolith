@@ -87,8 +87,8 @@ Arquivo: `Docs/diagram-toggle-master.drawio`
 | VPC | `10.0.0.0/16` | Rede isolada do projeto |
 | Internet Gateway | Anexado à VPC | Única porta de entrada/saída da VPC para a internet |
 | Public subnet | `10.0.1.0/24` (us-east-2a) | Onde fica a EC2; tem rota para o IGW |
-| Private subnet A | `10.0.2.0/24` (us-east-2a) | Onde fica o RDS; sem rota para a internet |
-| Private subnet B | `10.0.3.0/24` (us-east-2b) | Vazia. Existe porque o DB Subnet Group exige 2 AZs |
+| Private subnet A | `10.0.2.0/24` (us-east-2a) | Vazia. Existe porque o DB Subnet Group exige 2 AZs |
+| Private subnet B | `10.0.3.0/24` (us-east-2b) | Onde fica o RDS; sem rota para a internet |
 | DB Subnet Group | Private A + Private B | Pré-requisito da AWS para criar o RDS |
 | EC2 | IP público, Gunicorn na 5000 | Roda a API |
 | RDS PostgreSQL | Single-AZ, acesso público: **Não** | Banco de dados gerenciado |
@@ -136,6 +136,7 @@ Usuário → Internet → IGW → Route Table Public → SG-EC2 (5000) → EC2/G
 - **Segunda subnet privada:** não está no enunciado, mas sem ela o console não deixa criar o RDS.
 - **Sem NAT Gateway:** o RDS é gerenciado e não precisa de saída para a internet. Também evita custo por hora.
 - **Single-AZ:** suficiente para um MVP e mais barato. Multi-AZ seria o próximo passo para alta disponibilidade.
+- **RDS na us-east-2b (EC2 na 2a):** a AZ não foi definida na criação e a AWS escolheu a 2b. Funciona pela rota `local`; o ideal seria a mesma AZ da EC2 (menor latência, sem custo de tráfego entre AZs). Mantido e refletido no diagrama.
 - **Porta 5000 liberada:** necessária para validar a API, conforme o README.
 
 ---
